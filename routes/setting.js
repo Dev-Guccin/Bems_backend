@@ -17,10 +17,12 @@ const upload = multer({
 //var upload = multer({ dest: "uploads" })
 
 /* GET home page. */
-router.post('/excel', upload.single('file'), function(req, res, next) {
+router.post('/excel', upload.single('file'), function(req, res, next) {//파일을 받아서 uploads에 저장한다. 그럼 이때 util로 엑셀쪼개기 들어감
     console.log("post");
     console.log(req.file)
     console.log(req.file.filename)
+    //엑셀 쪼개기 들어가기
+    
     res.send('respond with a');
 });
 router.get('/excel', function(req, res, next) {
