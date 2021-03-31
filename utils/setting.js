@@ -21,13 +21,22 @@ var Frame={
 	ReadByte :'',
 	Active:''
 }
+var Detail={
+    ChannelName:'',
+    FrameName:'',
+    Tag:'',
+    ObjectType:'',
+    StartAddress:'',
+    BitOffset:'',
+    DataType:'',
+}
 var Excel = {
     loadExcelFile: async function(filepath){
         const sheetData = [] 
  
         const workbook = new ExcelJS.Workbook() // 엑셀의 객체
         await workbook.xlsx.readFile(filePath)
-        for (let page = 0; page < 2; page++) {
+        for (let page = 0; page < 3; page++) {
             const worksheet = workbook.worksheets[page] // 첫 번째 sheet 선택
             const options = { includeEmpty: true }
             // worksheet에 접근하여 데이터를 읽어옴
@@ -47,7 +56,6 @@ var Excel = {
                     Device.Period		=sheetData[i][5].value
                     Device.WaitTime		=sheetData[i][6].value
                     Device.Active		=sheetData[i][7].value
-                    console.log(Device)
                     // 이걸 DB에 저장해야함
                     DBH.device_insert(page, Device)
                 }
@@ -62,14 +70,23 @@ var Excel = {
                     Frame.StartAddress	=sheetData[i][5].value
                     Frame.ReadByte		=sheetData[i][6].value
                     Frame.Active		=sheetData[i][7].value
-                    console.log(Frame)
                     // 이걸 DB에 저장해야함
                     DBH.device_insert(page, Frame)
                 }
             }
             else{//Detail 페이지
                 DBH.device_delete('details')// DB깔끔하게 밀어버리기
-
+                for (let i = 2; i < sheetData.length; i++) {
+                    Detail.ChannelName	=sheetData[i][1].value
+                    Detail.FrameName	=sheetData[i][2].value
+                    Detail.Tag        	=sheetData[i][3].value
+                    Detail.ObjectType	=sheetData[i][4].value
+                    Detail.StartAddress	=sheetData[i][5].value
+                    Detail.BitOffset	=sheetData[i][6].value
+                    Detail.DataType		=sheetData[i][7].value
+                    // 이걸 DB에 저장해야함
+                    DBH.device_insert(page, Detail)
+                }
             }
         }
     }

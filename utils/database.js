@@ -34,7 +34,10 @@ var Database = {
             });
         }
         else{//Detail
-
+            connection.query(`INSERT INTO Details VALUES('${data.ChannelName}','${data.FrameName}','${data.Tag}','${data.ObjectType}',${data.StartAddress},${data.BitOffset},${data.DataType})`, (error, rows, fields) => {
+                if (error) throw error;
+                console.log('User info is: ', rows);
+            });
         }
         
     }
