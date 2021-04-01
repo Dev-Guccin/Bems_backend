@@ -11,6 +11,14 @@ router.get('/', function(req, res, next) {
   Setting.loadExcelFile(filePath)
 });
 
+router.post('/modbus', function(req, res, next) {
+  console.log("modbus test");
+  Database.device_select(req.body.tablename, function(rows){
+    console.log("이거 콜백 왜 안되냐");
+    res.send(rows)
+  });
+});
+
 router.get('/soso', function(req, res, next){
   console.log("test soso");
   res.send("김성연 바보");

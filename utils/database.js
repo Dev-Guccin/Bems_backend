@@ -8,11 +8,15 @@ const connection = mysql.createConnection({
 });
 connection.connect();
 var Database = {
-    device_select:function(){
-        connection.query('SELECT * from devices', (error, rows, fields) => {
+    device_select:function(table, callback){
+        connection.query(`SELECT * from ${table}`, (error, rows, fields) => {
             if (error) throw error;
             console.log('User info is: ', rows);
+            callback(rows);
         })
+    },
+    tableToJson:function(data){
+
     },
     device_delete:function(tablename){
         connection.query('DELETE from '+tablename, (error, rows, fields) => {
