@@ -33,7 +33,6 @@ var Detail={
 var Excel = {
     loadExcelFile: async function(filepath){
         const sheetData = [] 
- 
         const workbook = new ExcelJS.Workbook() // 엑셀의 객체
         await workbook.xlsx.readFile(filePath)
         for (let page = 0; page < 3; page++) {

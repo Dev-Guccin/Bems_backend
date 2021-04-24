@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Database = require("../utils/database.js")
 var Setting = require("../utils/setting.js")
+var Modbus = require("../utils/modbus.js")
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -14,7 +15,6 @@ router.get('/', function(req, res, next) {
 router.post('/modbus', function(req, res, next) {
   console.log("modbus test");
   Database.device_select(req.body.tablename, function(rows){
-    console.log("이거 콜백 왜 안되냐");
     res.send(rows)
   });
 });
@@ -24,4 +24,14 @@ router.get('/soso', function(req, res, next){
   res.send("김성연 바보");
 })
 
+router.get('/start', function(req, res, next){
+  console.log("test modbus");
+  Modbus.emit("start");
+  res.send("good");
+})
+router.get('/end', function(req, res, next){
+  console.log("test modbus");
+  Modbus.emit("end");
+  res.send("good");
+})
 module.exports = router;

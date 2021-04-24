@@ -1,6 +1,7 @@
 var express = require('express');
 var path = require('path');
 var router = express.Router();
+var Excel  = require('../utils/setting')
 
 var multer = require('multer'); // express에 multer모듈 적용 (for 파일업로드)
 const upload = multer({
@@ -22,7 +23,7 @@ router.post('/excel', upload.single('file'), function(req, res, next) {//파일�
     console.log(req.file)
     console.log(req.file.filename)
     //엑셀 쪼개기 들어가기
-    
+    Excel.loadExcelFile()
     res.send('respond with a');
 });
 router.get('/excel', function(req, res, next) {
