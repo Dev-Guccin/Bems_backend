@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var Database = require("../utils/database.js")
 var Setting = require("../utils/setting.js")
-var Modbus = require("../utils/modbus.js")
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -10,13 +9,6 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
   var filePath = './uploads/latestExcel.xlsx'
   Setting.loadExcelFile(filePath)
-});
-
-router.post('/modbus', function(req, res, next) {
-  console.log("modbus test");
-  Database.device_select(req.body.tablename, function(rows){
-    res.send(rows)
-  });
 });
 
 router.get('/soso', function(req, res, next){

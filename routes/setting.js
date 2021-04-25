@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path');
 var router = express.Router();
 var Excel  = require('../utils/setting')
+var Handler  = require('../utils/handler')
 
 var multer = require('multer'); // express에 multer모듈 적용 (for 파일업로드)
 const upload = multer({
@@ -24,6 +25,8 @@ router.post('/excel', upload.single('file'), function(req, res, next) {//파일�
     console.log(req.file.filename)
     //엑셀 쪼개기 들어가기
     Excel.loadExcelFile()
+    //전체 모듈 재실행 (나중에 bacnet별, modbus별 다르게 해줘도 좋을듯)
+    Handler.module_restart()
     res.send('respond with a');
 });
 router.get('/excel', function(req, res, next) {
