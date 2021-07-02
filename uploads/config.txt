@@ -1,0 +1,4 @@
+[local setting]
+modbus=1
+bacnet=1
+database=1
