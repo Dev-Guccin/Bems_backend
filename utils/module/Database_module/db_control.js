@@ -346,9 +346,9 @@ async function main() {
     //DB의 정보를 받았기 때문에 각 객체에 대해 sql 연결을 진행한다.
     await set_database()
     //Excel에서 다시 데이터를 하나씩 받으며 통신을 시작한다. (비동기로 진행한다)
-    intervaltime = 2000
-    //setInterval(()=>start_sending(),intervaltime)
-    start_sending()
+    intervaltime = 5000
+    setInterval(()=>start_sending(),intervaltime)
+    //start_sending()
     //통신이 종료되면 모든 CONNECT의 값들을 end시킨다.(아마 쓸일 거의 없을듯)
     //disconnect_all();
 }

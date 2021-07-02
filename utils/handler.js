@@ -79,7 +79,9 @@ var Handler = {
         
     },
     start_module: function (filename) {
+        console.log("[+] start moduel : ", filename)
         //filename에 따라 데이터가 달라져야함.
+        if(filename)
         var pm2 = require('pm2')
         pm2.connect(function (err) {
             if (err) {

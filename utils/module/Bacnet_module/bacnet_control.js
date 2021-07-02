@@ -90,6 +90,5 @@ function sync_readPropertyMultiple(ip_address, requestArray, station) {
             }
         })
     })
-
 }
 main()
